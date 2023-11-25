@@ -3,7 +3,7 @@ using WebApiTemplate.Data.Common.Interfaces;
 
 namespace WebApiTemplate.Data.Models.Entities
 {
-	public class ApplicationRole : IdentityRole, IDeletableEntity, IModifier
+	public class ApplicationRole : IdentityRole<string>, IDeletableEntity, IModifier
 	{
 		public DateTime CreatedOn { get; set; }
 
