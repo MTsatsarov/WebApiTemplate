@@ -1,0 +1,31 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "M.Tsatsarov",
+	"classifications": ["Web"],
+	"name": "ASP .NET CORE WEB API TEMPLATE",
+	"identity": "dotnet.Custom.Template",
+	"shortName": "asp-web-api-2",
+	"defaultName": "AspNetCoreWebApiTemplate",
+	"tags": {
+	  "language": "C#",
+	  "type": "project"
+	},
+	"sourceName": "WebApiTemplate",
+	"preferNameDirectory": true,
+	"symbols": {
+	  "projectName": {
+		"type": "parameter",
+		"datatype": "string",
+		"defaultValue": "MyProject"
+	  }
+	},
+	"sources": [
+		{
+		  "modifiers": [
+			{
+			  "exclude": [ "src/.vs/**", "template.config/**" ]
+			}
+		  ]
+		}
+	  ]
+  }
