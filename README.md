@@ -3,7 +3,7 @@
 🌐 Kickstart your backend development with this ASP.NET Core Web API template. Configure and integrate SQL Server seamlessly for robust data management, including special configurations for tracking deleted entities and modifications.
 
 **Key Features:**
-- Built on the latest .NET framework (option for .NET 6, 7, 8, etc.)
+- Built on the latest .NET framework (option for .NET 6)
 - Enhanced SQL Server Configuration
   - Deleted entities tracking
   - Entity modifications tracking
