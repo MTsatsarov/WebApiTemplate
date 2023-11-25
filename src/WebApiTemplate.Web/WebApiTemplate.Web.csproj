@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebApiTemplate.Data\WebApiTemplate.Data.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Services.Mappings\WebApiTemplate.Services.Mappings.csproj" />
   </ItemGroup>
 
 </Project>
