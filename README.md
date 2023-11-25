@@ -11,7 +11,7 @@
 
 ## Technologies
 - ASP.NET Core
-- .NET (option for 6, 7, 8, etc.)
+- .NET (option for 6)
 - SQL Server
 
 ## Usage
