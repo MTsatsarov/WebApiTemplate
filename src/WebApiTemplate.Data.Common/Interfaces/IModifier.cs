@@ -2,7 +2,7 @@
 {
 	public interface IModifier
 	{
-		DateTime CreateOn { get; set; }
+		DateTime CreatedOn { get; set; }
 
 		DateTime ModifiedOn { get; set; }
 	}

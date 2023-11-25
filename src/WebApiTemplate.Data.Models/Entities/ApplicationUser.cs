@@ -5,7 +5,7 @@ namespace WebApiTemplate.Data.Models.Entities
 {
 	public class ApplicationUser : IdentityUser, IDeletableEntity, IModifier
 	{
-		public DateTime CreateOn { get; set; }
+		public DateTime CreatedOn { get; set; }
 
 		public DateTime ModifiedOn { get; set; }
 

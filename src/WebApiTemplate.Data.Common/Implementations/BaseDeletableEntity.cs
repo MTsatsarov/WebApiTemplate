@@ -5,7 +5,7 @@ namespace WebApiTemplate.Data.Common.Implementations
 	public class BaseDeletableEntity<TId> : IDeletableEntity, IModifier
 	{
 
-		public DateTime CreateOn { get; set; }
+		public DateTime CreatedOn { get; set; }
 
 		public DateTime ModifiedOn { get; set; }
 
