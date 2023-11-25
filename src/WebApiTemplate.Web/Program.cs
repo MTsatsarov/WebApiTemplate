@@ -1,7 +1,11 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using WebApiTemplate.Data;
 using WebApiTemplate.Data.Models.Entities;
+using WebApiTemplate.Services.Mappings;
 
 namespace WebApiTemplate.Web
 {
@@ -22,6 +26,8 @@ namespace WebApiTemplate.Web
 			.AddEntityFrameworkStores<ApplicationDbContext>()
 			.AddDefaultTokenProviders();
 
+			//Automapper
+			builder.Services.AddAutoMapper(typeof(WebApiTemplateProfile));
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

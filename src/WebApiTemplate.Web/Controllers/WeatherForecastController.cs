@@ -1,6 +1,11 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApiTemplate.Data;
 using WebApiTemplate.Data.Models.Entities;
 
