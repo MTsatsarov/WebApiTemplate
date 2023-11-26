@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApiTemplate.Data;
 using WebApiTemplate.Data.Models.Entities;
+using WebApiTemplate.Services.Mappings.Interfaces;
 
 namespace WebApiTemplate.Web.Controllers
 {

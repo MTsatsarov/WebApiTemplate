@@ -17,7 +17,20 @@ namespace WebApiTemplate.Services.Mappings
 			config.CreateProfile("WebApiTemplateProfile",
 				configuration =>
 				{
+					foreach (var map in GetFromMaps(types))
+					{
+						configuration.CreateMap(map.From, map.To);
+					}
 
+					foreach (var map in GetToMaps(types))
+					{
+						configuration.CreateMap(map.From, map.To);
+					}
+
+					foreach (var map in GetCustomMappings(types))
+					{
+						map.CreateMappings(configuration);
+					}
 
 				});
 		}
@@ -54,6 +67,18 @@ namespace WebApiTemplate.Services.Mappings
 						 };
 
 			return toMaps;
+		}
+
+		private static IEnumerable<ICustomMappings> GetCustomMappings(IEnumerable<Type> types)
+		{
+			var customMaps = from t in types
+							 from i in t.GetTypeInfo().GetInterfaces()
+							 where typeof(ICustomMappings).GetTypeInfo().IsAssignableFrom(t) &&
+								   !t.GetTypeInfo().IsAbstract &&
+								   !t.GetTypeInfo().IsInterface
+							 select (ICustomMappings)Activator.CreateInstance(t);
+
+			return customMaps;
 		}
 	}
 }
