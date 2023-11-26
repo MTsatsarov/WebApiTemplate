@@ -1,7 +1,12 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using WebApiTemplate.Data;
 using WebApiTemplate.Data.Models.Entities;
+using StackExchange.Redis;
+using WebApiTemplate.Services.Infrastructure.Cache;
 
 namespace WebApiTemplate.Web
 {
@@ -22,6 +27,16 @@ namespace WebApiTemplate.Web
 			.AddEntityFrameworkStores<ApplicationDbContext>()
 			.AddDefaultTokenProviders();
 
+			//Redis
+			var redisConnectionString = builder.Configuration.GetSection("RedisCache").Value;
+			var redisConnection = ConnectionMultiplexer.Connect(redisConnectionString);
+
+			builder.Services.AddSingleton<ICacheService, RedisCacheService>();
+			builder.Services.AddStackExchangeRedisCache(opt =>
+			{
+				opt.Configuration = redisConnectionString;
+				opt.InstanceName = nameof(WebApiTemplate);
+			});
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

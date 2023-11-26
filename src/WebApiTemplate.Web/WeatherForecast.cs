@@ -1,3 +1,5 @@
+using System;
+
 namespace WebApiTemplate.Web
 {
 	public class WeatherForecast
