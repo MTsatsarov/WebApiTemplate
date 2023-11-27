@@ -15,6 +15,6 @@
 		/// In case of key not presenting, nothing happens.
 		/// </summary>
 		/// <param name="key">The key which needs to be removed..</param>
-		bool Remove(string key);
+		Task Remove(string key);
 	}
 }

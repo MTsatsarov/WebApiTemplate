@@ -18,7 +18,7 @@ namespace WebApiTemplate.Services.Infrastructure.Cache
 
 		public async Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> fallbackFunc, int? cacheExpirationInSeconds = null)
 		{
-			if (!VerifyRedisConnected())
+			if (!RedisIsConnected())
 			{
 				return await fallbackFunc();
 			}
@@ -35,12 +35,15 @@ namespace WebApiTemplate.Services.Infrastructure.Cache
 
 		}
 
-		public bool Remove(string key)
+		public async Task Remove(string key)
 		{
-			throw new NotImplementedException();
+			if (RedisIsConnected())
+			{
+				await this.cache.RemoveAsync(key);
+			}
 		}
 
-		private bool VerifyRedisConnected() => this.redisConnection.IsConnected;
+		private bool RedisIsConnected() => this.redisConnection.IsConnected;
 
 		private async Task<T> GetOrSetValue<T>(string key, Func<Task<T>> fallbackFunc, int? cacheExpiration)
 		{
