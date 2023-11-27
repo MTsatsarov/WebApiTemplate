@@ -29,9 +29,11 @@ namespace WebApiTemplate.Web
 
 			//Redis
 			var redisConnectionString = builder.Configuration.GetSection("RedisCache").Value;
-			var redisConnection = ConnectionMultiplexer.Connect(redisConnectionString);
 
+			var redisConnection = ConnectionMultiplexer.Connect(redisConnectionString);
+			builder.Services.AddSingleton<IConnectionMultiplexer>(redisConnection);
 			builder.Services.AddSingleton<ICacheService, RedisCacheService>();
+
 			builder.Services.AddStackExchangeRedisCache(opt =>
 			{
 				opt.Configuration = redisConnectionString;
