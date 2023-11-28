@@ -7,11 +7,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WebApiTemplate.Data\WebApiTemplate.Data.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Services.Infrastructure\WebApiTemplate.Services.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

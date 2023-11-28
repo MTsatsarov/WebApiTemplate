@@ -1,8 +1,14 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApiTemplate.Data;
 using WebApiTemplate.Data.Models.Entities;
+using WebApiTemplate.Services.Infrastructure.Cache;
 
 namespace WebApiTemplate.Web.Controllers
 {
@@ -15,13 +21,14 @@ namespace WebApiTemplate.Web.Controllers
 		{
 		"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 		};
-
+		private readonly ICacheService cache;
 		private readonly ILogger<WeatherForecastController> _logger;
 
-		public WeatherForecastController(ILogger<WeatherForecastController> logger, ApplicationDbContext db)
+		public WeatherForecastController(ILogger<WeatherForecastController> logger, ApplicationDbContext db, ICacheService cache)
 		{
 			_logger = logger;
 			this.dbContext = db;
+			this.cache = cache;
 		}
 
 		[HttpGet(Name = "GetWeatherForecast")]
@@ -41,6 +48,18 @@ namespace WebApiTemplate.Web.Controllers
 		public async Task<IActionResult> GetAll()
 		{
 			return this.Ok(this.dbContext.Users.ToList());
+		}
+
+		[HttpGet]
+		[Route("testRedisCache")]
+		public async Task<IActionResult> TestRedisCache()
+		{
+			var result = await this.cache.GetOrSetAsync<ApplicationUser>("User",() =>
+			{
+				 return this.dbContext.Users.FirstOrDefaultAsync();
+			}, 1000);
+
+			return this.Ok(result);
 		}
 	}
 }
