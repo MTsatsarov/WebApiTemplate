@@ -7,6 +7,10 @@ using WebApiTemplate.Data;
 using WebApiTemplate.Data.Models.Entities;
 using StackExchange.Redis;
 using WebApiTemplate.Services.Infrastructure.Cache;
+using MassTransit;
+using System;
+using Microsoft.Extensions.Configuration;
+using WebApiTemplate.Web.Common.Models.Config;
 
 namespace WebApiTemplate.Web
 {
@@ -39,6 +43,22 @@ namespace WebApiTemplate.Web
 				opt.Configuration = redisConnectionString;
 				opt.InstanceName = nameof(WebApiTemplate);
 			});
+
+			//MQ
+
+			builder.Services.AddMassTransit(mt =>
+			{
+				var mqModel = builder.Configuration.GetSection(nameof(RabbitMqConfig)).Get<RabbitMqConfig>();
+				mt.UsingRabbitMq((context, cfg) =>
+				{
+					cfg.Host(new Uri(mqModel.Location), h =>
+					{
+						h.Username(mqModel.Hostname);
+						h.Password(mqModel.Password);
+					});
+				});
+			});
+
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
