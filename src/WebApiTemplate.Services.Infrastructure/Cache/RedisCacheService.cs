@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using FluentExtensions.Extensions;
+using Microsoft.Extensions.Caching.Distributed;
 using StackExchange.Redis;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.Json;
+using WebApiTemplate.Common.Helpers;
 
 namespace WebApiTemplate.Services.Infrastructure.Cache
 {
@@ -58,32 +58,16 @@ namespace WebApiTemplate.Services.Infrastructure.Cache
 				}
 
 				T result = await fallbackFunc();
-				await this.cache.SetAsync(key, ToByteArray(result), options);
+				await this.cache.SetAsync(key, ParseToByteArray(result), options);
 			}
 
-			return FromByteArray<T>(value);
+			return ParseToGeneric<T>(value);
 		}
 
-		private static byte[] ToByteArray<T>(T obj)
-		{
-			BinaryFormatter bf = new BinaryFormatter();
-			using (var ms = new MemoryStream())
-			{
-				bf.Serialize(ms, obj);
-				return ms.ToArray();
-			}
-		}
+		private static byte[] ParseToByteArray<T>(T obj)
+					=> obj!.ToJson().ToByteArray();
 
-		public T FromByteArray<T>(byte[] data)
-		{
-			if (data == null)
-				return default(T);
-			BinaryFormatter bf = new BinaryFormatter();
-			using (MemoryStream ms = new MemoryStream(data))
-			{
-				object obj = bf.Deserialize(ms);
-				return (T)obj;
-			}
-		}
+		private static T ParseToGeneric<T>(byte[] byteArray)
+			=> new StreamReader(new MemoryStream(byteArray)).ReadToEnd().FromJson<T>();
 	}
 }

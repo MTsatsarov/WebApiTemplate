@@ -1,9 +1,13 @@
-﻿using WebApiTemplate.Data.Common.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using WebApiTemplate.Data.Common.Interfaces;
 
 namespace WebApiTemplate.Data.Common.Implementations
 {
 	public class BaseDeletableEntity<TId> : IDeletableEntity, IModifier
 	{
+
+		[Key]
+		public TId Id { get; set; }
 
 		public DateTime CreatedOn { get; set; }
 
