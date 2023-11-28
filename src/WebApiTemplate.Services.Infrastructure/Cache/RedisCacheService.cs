@@ -59,6 +59,8 @@ namespace WebApiTemplate.Services.Infrastructure.Cache
 
 				T result = await fallbackFunc();
 				await this.cache.SetAsync(key, ParseToByteArray(result), options);
+
+				return result;
 			}
 
 			return ParseToGeneric<T>(value);
