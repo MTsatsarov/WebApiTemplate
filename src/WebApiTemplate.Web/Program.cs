@@ -7,6 +7,12 @@ using WebApiTemplate.Data;
 using WebApiTemplate.Data.Models.Entities;
 using StackExchange.Redis;
 using WebApiTemplate.Services.Infrastructure.Cache;
+using MassTransit;
+using System;
+using Microsoft.Extensions.Configuration;
+using WebApiTemplate.Web.Common.Models.Config;
+using System.Linq;
+using WebApiTemplate.Services.Infrastructure.MessageQueue;
 
 namespace WebApiTemplate.Web
 {
@@ -39,6 +45,39 @@ namespace WebApiTemplate.Web
 				opt.Configuration = redisConnectionString;
 				opt.InstanceName = nameof(WebApiTemplate);
 			});
+
+			//MQ
+
+			builder.Services.AddTransient<IMessageService, MessageService>();
+			var mqModel = builder.Configuration.GetSection(nameof(RabbitMqConfig)).Get<RabbitMqConfig>();
+
+			var consumers = typeof(Program).Assembly
+				.GetExportedTypes()
+				.Where(type => typeof(IConsumer).IsAssignableFrom(type))
+				.ToList();
+
+			builder.Services.AddMassTransit(mt =>
+			{
+				consumers.ForEach(consumer => mt.AddConsumer(consumer).Endpoint(endpointConfig =>
+				{
+					endpointConfig.Name = consumer.Name;
+				}));
+
+				mt.UsingRabbitMq((context, cfg) =>
+				{
+					cfg.Host(mqModel.Host, mqModel.VirtualHost, h =>
+					{
+						h.Username(mqModel.User);
+						h.Password(mqModel.Password);
+					});
+
+					consumers.ForEach(c => cfg.ReceiveEndpoint(c.FullName!, endpoint =>
+					{
+						endpoint.ConfigureConsumer(context, c);
+					}));
+				});
+			});
+
 
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
