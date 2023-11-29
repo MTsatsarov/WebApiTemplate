@@ -53,7 +53,7 @@ namespace WebApiTemplate.Web
 
 			var consumers = typeof(Program).Assembly
 				.GetExportedTypes()
-				.Where(type => typeof(IMessageService).IsAssignableFrom(type))
+				.Where(type => typeof(IConsumer).IsAssignableFrom(type))
 				.ToList();
 
 			builder.Services.AddMassTransit(mt =>
