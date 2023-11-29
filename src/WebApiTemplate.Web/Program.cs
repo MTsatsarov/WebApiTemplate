@@ -11,6 +11,8 @@ using MassTransit;
 using System;
 using Microsoft.Extensions.Configuration;
 using WebApiTemplate.Web.Common.Models.Config;
+using System.Linq;
+using WebApiTemplate.Services.Infrastructure.MessageQueue;
 
 namespace WebApiTemplate.Web
 {
@@ -46,16 +48,33 @@ namespace WebApiTemplate.Web
 
 			//MQ
 
+			builder.Services.AddTransient<IMessageService, MessageService>();
+			var mqModel = builder.Configuration.GetSection(nameof(RabbitMqConfig)).Get<RabbitMqConfig>();
+
+			var consumers = typeof(Program).Assembly
+				.GetExportedTypes()
+				.Where(type => typeof(IMessageService).IsAssignableFrom(type))
+				.ToList();
+
 			builder.Services.AddMassTransit(mt =>
 			{
-				var mqModel = builder.Configuration.GetSection(nameof(RabbitMqConfig)).Get<RabbitMqConfig>();
+				consumers.ForEach(consumer => mt.AddConsumer(consumer).Endpoint(endpointConfig =>
+				{
+					endpointConfig.Name = consumer.Name;
+				}));
+
 				mt.UsingRabbitMq((context, cfg) =>
 				{
-					cfg.Host(new Uri(mqModel.Location), h =>
+					cfg.Host(mqModel.Host, mqModel.VirtualHost, h =>
 					{
-						h.Username(mqModel.Hostname);
+						h.Username(mqModel.User);
 						h.Password(mqModel.Password);
 					});
+
+					consumers.ForEach(c => cfg.ReceiveEndpoint(c.FullName!, endpoint =>
+					{
+						endpoint.ConfigureConsumer(context, c);
+					}));
 				});
 			});
 

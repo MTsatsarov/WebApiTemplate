@@ -2,10 +2,12 @@
 {
 	public class RabbitMqConfig
 	{
-        public string Location { get; set; }
+		public string Host { get; set; }
 
-        public string Hostname { get; set; }
+		public string VirtualHost { get; set; }
 
-        public string Password { get; set; }
-    }
+		public string User { get; set; }
+
+		public string Password { get; set; }
+	}
 }
