@@ -13,6 +13,10 @@ using Microsoft.Extensions.Configuration;
 using WebApiTemplate.Web.Common.Models.Config;
 using System.Linq;
 using WebApiTemplate.Services.Infrastructure.MessageQueue;
+using WebApiTemplate.Services.Models.Config;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebApiTemplate.Web
 {
@@ -32,6 +36,60 @@ namespace WebApiTemplate.Web
 			builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 			.AddEntityFrameworkStores<ApplicationDbContext>()
 			.AddDefaultTokenProviders();
+
+			builder.Services.Configure<IdentityOptions>(options =>
+			{
+				// Default Lockout settings.
+				options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+				options.Lockout.MaxFailedAccessAttempts = 5;
+				options.Lockout.AllowedForNewUsers = true;
+			});
+
+			builder.Services.Configure<IdentityOptions>(options =>
+			{
+				// Default Password settings.
+				options.Password.RequireDigit = true;
+				options.Password.RequireLowercase = true;
+				options.Password.RequireNonAlphanumeric = true;
+				options.Password.RequireUppercase = true;
+				options.Password.RequiredLength = 8;
+				options.Password.RequiredUniqueChars = 1;
+			});
+
+			var tokenSection = builder.Configuration.GetSection(nameof(AuthTokenConfig));
+			var tokenConfig = tokenSection.Get<AuthTokenConfig>();
+			builder.Services.Configure<AuthTokenConfig>(tokenSection);
+
+			builder.Services.AddAuthentication(x =>
+			{
+				x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			}).AddJwtBearer(o =>
+			{
+				var key = Encoding.UTF8.GetBytes(tokenConfig.Key);
+				o.SaveToken = true;
+				o.TokenValidationParameters = new TokenValidationParameters
+				{
+					ValidateIssuer = false,
+					ValidateAudience = false,
+					ValidateLifetime = true,
+					ValidateIssuerSigningKey = true,
+					ValidIssuer = tokenConfig.Issuer,
+					ValidAudience = tokenConfig.Audience,
+					IssuerSigningKey = new SymmetricSecurityKey(key)
+				};
+			});
+
+			builder.Services.AddCors(c =>
+			{
+				c.AddPolicy(name: "AllowOrigins",
+				 options =>
+				 {
+					 options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+				 });
+
+			});
+
 
 			//Redis
 			var redisConnectionString = builder.Configuration.GetSection("RedisCache").Value;
@@ -99,8 +157,11 @@ namespace WebApiTemplate.Web
 				dbContext.Database.Migrate();
 			}
 
+			app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 			app.UseHttpsRedirection();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 
