@@ -1,4 +1,5 @@
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using WebApiTemplate.Services.Infrastructure.Cache;
 
 namespace WebApiTemplate.Web.Controllers
 {
+	[Authorize]
 	[ApiController]
 	[Route("[controller]")]
 	public class WeatherForecastController : ControllerBase
