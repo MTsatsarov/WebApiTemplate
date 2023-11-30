@@ -15,9 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApiTemplate.Data\WebApiTemplate.Data.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Common\WebApiTemplate.Common.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Services.Business\WebApiTemplate.Services.Business.csproj" />
     <ProjectReference Include="..\WebApiTemplate.Services.Infrastructure\WebApiTemplate.Services.Infrastructure.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Services.Models\WebApiTemplate.Services.Models.csproj" />
     <ProjectReference Include="..\WebApiTemplate.Web.Common\WebApiTemplate.Web.Common.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Web.Infrastructure\WebApiTemplate.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Web.Models\WebApiTemplate.Web.Models.csproj" />
   </ItemGroup>
 
 </Project>

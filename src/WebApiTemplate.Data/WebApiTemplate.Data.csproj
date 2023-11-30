@@ -21,6 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebApiTemplate.Common\WebApiTemplate.Common.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Data.Common\WebApiTemplate.Data.Common.csproj" />
     <ProjectReference Include="..\WebApiTemplate.Data.Models\WebApiTemplate.Data.Models.csproj" />
   </ItemGroup>
 

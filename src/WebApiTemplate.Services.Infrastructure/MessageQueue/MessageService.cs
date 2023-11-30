@@ -1,7 +1,7 @@
-﻿using MassTransit;
-
-namespace WebApiTemplate.Services.Infrastructure.MessageQueue
+﻿namespace WebApiTemplate.Services.Infrastructure.MessageQueue
 {
+	using MassTransit;
+
 	public class MessageService : IMessageService
 	{
 		private readonly IBus bus;
