@@ -1,0 +1,40 @@
+  <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>.</PackageOutputPath>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="src\**\*" Exclude="**\bin\**\*;**\obj\**\*" />
+    <Compile Remove="**\*" />
+    <None Include="README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <Version>1.0.0</Version>
+	<PackageId>MyAspNetCoreWebApiTemplate</PackageId>
+    <Title>ASP.NET Core Template</Title>
+	<Authors>MihailTsatsarov</Authors>
+	<Company>MihailTsatsarov</Company>
+    <Copyright>MihailTsatsarov © 2023</Copyright>
+	  <Description>
+		  Ready to use asp net core web api template. It includes features like MQ, Redis
+		  cache, identity, Db etc..
+	  </Description>
+    <PackageTags>ASP.NET;Template;C#;.NET;WebApi;Core;web;</PackageTags>
+    <PackageCopyright>MihailTsatsarov © 2023</PackageCopyright>
+    <PackageProjectUrl>https://github.com/MTsatsarov/WebApiTemplate</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/MTsatsarov/WebApiTemplate</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+</Project>
+	
