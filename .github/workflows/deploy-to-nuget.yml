@@ -1,10 +1,7 @@
 name: Publish to Nuget
 
 on:
-  workflow_call:
-    secrets:
-      nuget_api_key:
-      required: true
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
