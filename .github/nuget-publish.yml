@@ -1,0 +1,7 @@
+name: 01. Publish to Nuget.org
+
+on:
+  workflow_dispatch:
+jobs:
+  deploy-to-nuget:
+    uses: './.github/workflows/deploy-to-nuget.yml'
