@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebApiTemplate.Common\WebApiTemplate.Common.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Data.Models\WebApiTemplate.Data.Models.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Data\WebApiTemplate.Data.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Services.Business\WebApiTemplate.Services.Business.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Services.Data\WebApiTemplate.Services.Data.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Services.Models\WebApiTemplate.Services.Models.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Tests.Common\WebApiTemplate.Tests.Common.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Web.Models\WebApiTemplate.Web.Models.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Web\WebApiTemplate.Web.csproj" />
+  </ItemGroup>
+
+</Project>

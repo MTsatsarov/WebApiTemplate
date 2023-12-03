@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApiTemplate.Common\WebApiTemplate.Common.csproj" />
-    <ProjectReference Include="..\WebApiTemplate.Data.Models\WebApiTemplate.Data.Models.csproj" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+	  <PackageReference Include="NUnit" Version="3.13.2" />
+	  <PackageReference Include="NUnit3TestAdapter" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WebApiTemplate.Data\WebApiTemplate.Data.csproj" />
   </ItemGroup>
 
