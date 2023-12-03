@@ -25,15 +25,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Services.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Web.Common", "WebApiTemplate.Web.Common\WebApiTemplate.Web.Common.csproj", "{DAF0A3C4-7713-48B6-BE61-0A53826D3CAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Services.Business", "WebApiTemplate.Services.Business\WebApiTemplate.Services.Business.csproj", "{20E1507E-DB3F-4B6A-A006-2E2B468F3728}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Services.Business", "WebApiTemplate.Services.Business\WebApiTemplate.Services.Business.csproj", "{20E1507E-DB3F-4B6A-A006-2E2B468F3728}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Services.Data", "WebApiTemplate.Services.Data\WebApiTemplate.Services.Data.csproj", "{B42FB107-C629-4970-BFB9-99AF9067EC64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Services.Data", "WebApiTemplate.Services.Data\WebApiTemplate.Services.Data.csproj", "{B42FB107-C629-4970-BFB9-99AF9067EC64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Services.Models", "WebApiTemplate.Services.Models\WebApiTemplate.Services.Models.csproj", "{DA539CA3-D3D1-4880-A1AB-1C2187E8808D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Services.Models", "WebApiTemplate.Services.Models\WebApiTemplate.Services.Models.csproj", "{DA539CA3-D3D1-4880-A1AB-1C2187E8808D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Web.Models", "WebApiTemplate.Web.Models\WebApiTemplate.Web.Models.csproj", "{DD2E3B32-167E-46D1-BE37-CF33B8156BB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Web.Models", "WebApiTemplate.Web.Models\WebApiTemplate.Web.Models.csproj", "{DD2E3B32-167E-46D1-BE37-CF33B8156BB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Web.Infrastructure", "WebApiTemplate.Web.Infrastructure\WebApiTemplate.Web.Infrastructure.csproj", "{B2209125-190A-4884-8660-1AB660C7EC6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Web.Infrastructure", "WebApiTemplate.Web.Infrastructure\WebApiTemplate.Web.Infrastructure.csproj", "{B2209125-190A-4884-8660-1AB660C7EC6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Tests", "WebApiTemplate.Tests\WebApiTemplate.Tests.csproj", "{E06A1340-6BEA-430C-BD4C-1D7E87CA9574}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Tests.Common", "WebApiTemplate.Tests.Common\WebApiTemplate.Tests.Common.csproj", "{42F06BE6-8E7B-48E4-9B1D-5070C15D4C0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +93,14 @@ Global
 		{B2209125-190A-4884-8660-1AB660C7EC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2209125-190A-4884-8660-1AB660C7EC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2209125-190A-4884-8660-1AB660C7EC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E06A1340-6BEA-430C-BD4C-1D7E87CA9574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E06A1340-6BEA-430C-BD4C-1D7E87CA9574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E06A1340-6BEA-430C-BD4C-1D7E87CA9574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E06A1340-6BEA-430C-BD4C-1D7E87CA9574}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F06BE6-8E7B-48E4-9B1D-5070C15D4C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F06BE6-8E7B-48E4-9B1D-5070C15D4C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F06BE6-8E7B-48E4-9B1D-5070C15D4C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F06BE6-8E7B-48E4-9B1D-5070C15D4C0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +117,8 @@ Global
 		{DA539CA3-D3D1-4880-A1AB-1C2187E8808D} = {A2D3327C-B6A9-4042-98A6-EF31A37775F0}
 		{DD2E3B32-167E-46D1-BE37-CF33B8156BB9} = {8025661E-E81A-4103-92B2-D7D33A74632B}
 		{B2209125-190A-4884-8660-1AB660C7EC6A} = {8025661E-E81A-4103-92B2-D7D33A74632B}
+		{E06A1340-6BEA-430C-BD4C-1D7E87CA9574} = {D4909525-F554-4D33-822C-E11238367481}
+		{42F06BE6-8E7B-48E4-9B1D-5070C15D4C0E} = {D4909525-F554-4D33-822C-E11238367481}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A38FBF3-7C17-4EF6-9A48-FE35A1AA589B}
